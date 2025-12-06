@@ -1,122 +1,81 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "v0.1.0",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#F26419",
+    "light": "#FF8548",
+    "dark": "#F26419"
   },
-  "favicon": "/favicon.svg",
+  "background": {
+    "decoration": "gradient"
+  },
   "navigation": {
     "tabs": [
+      {
+        "tab": "VES",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "documentation/ves-v0.1.0/intro",
+              "documentation/ves-v0.1.0/getting-started",
+              "documentation/ves-v0.1.0/ves"
+            ]
+          },
+          {
+            "group": "Coming Soon",
+            "pages": ["documentation/coming-soon/overview"]
+          }
+        ]
+      },
       {
         "tab": "Guides",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Guides",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Customization",
-            "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "documentation/guides/overview",
+              "documentation/guides/configuration",
+              "documentation/guides/troubleshooting",
+              "documentation/guides/building",
+              "documentation/guides/contributing"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Benchmarks",
         "groups": [
           {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
-            ]
+            "group": "Benchmarks",
+            "pages": ["documentation/benchmarks/v1.0.0"]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+  "search": {
+    "prompt": "Search Docs"
   },
   "navbar": {
     "links": [
       {
+        "label": "GitHub",
+        "icon": "github",
+        "href": "https://github.com/H3IMD3LL-Labs-Inc/VES"
+      },
+      {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "icon": "envelope",
+        "href": "mailto:dennis.njuguna@heimdelllabs.cloud"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+    ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/heimdell_labs",
+      "github": "https://github.com/H3IMD3LL-Labs-Inc/VES"
     }
   }
 }

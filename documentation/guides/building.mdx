@@ -1,0 +1,82 @@
+---
+title: 'Building the source locally'
+description: "How to build the latest source version on your own PC"
+sidebarTitle: "Building from source"
+icon: 'code'
+---
+
+<Info>
+    v1.0.0 will introduce breaking changes to this documentation
+</Info>
+
+<Warning>
+    - Rust version 1.89.0 or higher is required when building from source, run `rustup update` to update your Rust version. See [installing Rust](https://rust-lang.org/install)
+    - libprotoc version 30.2 or higher is required to run VES. Make sure you have an updated version of Protoc installed. Visit [protobuf.dev](https://protobuf.dev/installation/) to install libprotoc.
+</Warning>
+
+---
+
+This guide is intended for use when developing the Core Agent locally, if you're interested in using the Core Agent locally. See [running an instance locally](../ves-v0.1.0/getting-started)
+
+Building the latest version of the source code locally on Linux and Windows takes ~10 minutes, use the following steps
+
+<Steps>
+    <Step title="Clone the latest version locally">
+        Go to [latest source version](https://github.com/H3IMD3LL-Labs-Inc/VES/tree/main), copy the repo web URL
+
+        <Frame>
+            <img src="/images/ves_repo_web_url.png" alt="Repo web URL" />
+        </Frame>
+
+        On your laptop's terminal, preferably in your $HOME directory, clone the repo
+
+        ```bash
+        git clone https://github.com/H3IMD3LL-Labs-Inc/VES.git
+        ```
+    </Step>
+    <Step title="Build an executable binary from your local repo">
+        Go to the repo's root directory and run the cargo build command to get an executable binary
+
+        ```bash
+        cd VES
+        cargo build --release --locked
+        ```
+
+        <Note>
+            The `--locked` when building the source ensures you use the exact dependency version specified in the **`Cargo.lock`** file, **DO NOT manually edit this file!**
+        </Note>
+    </Step>
+    <Step title="Ensure the executable binary exists">
+        Find your executable binary located here, from the repo's root directory
+
+        <Tabs>
+            <Tab title="Linux">
+                ```bash
+                cd target/release
+                ```
+            </Tab>
+            <Tab title="Windows">
+                ```bash
+                cd target\release
+                ```
+            </Tab>
+        </Tabs>
+
+        <Frame>
+            <img src="/images/executable_binary_location.png" alt="Executable binary location" />
+        </Frame>
+    </Step>
+</Steps>
+---
+You now have the Core Agent binary on your PC configured with default configuration options.
+
+## Next Steps
+
+<CardGroup cols={2}>
+    <Card title="Configuration Guides" icon="gear" href="..guides/configuration">
+        Get started with your own configuration options
+    </Card>
+    <Card title="Contributing" icon="github" href="https://github.com/H3IMD3LL-Labs-Inc/VES/CONTRIBUTING.md">
+        Get started contributing to developments and improvements
+    </Card>
+</CardGroup>

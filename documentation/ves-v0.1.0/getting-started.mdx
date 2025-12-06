@@ -1,0 +1,128 @@
+---
+title: "Getting started with VES v0.1.0"
+description: "Step-by-step guide to install, configure, and use your first VES instance locally"
+sidebarTitle: "Getting started with VES v0.1.0"
+icon: "rocket"
+---
+
+<Info>
+    v1.0.0 will introduce breaking changes to this documentation
+</Info>
+
+<Warning>
+    - Rust version 1.89.0 or higher is required when building from source, run `rustup update` to update your Rust version. See [installing Rust](https://rust-lang.org/install)
+    - libprotoc version 30.2 or higher is required to run VES. Make sure you have an updated version of Protoc installed. Visit [protobuf.dev](https://protobuf.dev/installation/) to install libprotoc.
+</Warning>
+
+
+<Steps>
+
+    <Step title="Install the repo locally">
+        Clone the repo locally in **$HOME** directory, and enter the root directory
+
+        ```bash
+        git clone https://github.com/H3IMD3LL-Labs-Inc/VES.git
+        cd VES
+        ```
+        To update your current version of VES to try new features, run the following command before each configuration + build
+
+        ```bash
+        cd VES
+        git pull origin main
+        ```
+        <Note>
+            Updating your version from the main repo may introduce breaking changes as this will often contain the latest-unstable version
+        </Note>
+    </Step>
+    <Step title="Configure VES before building">
+        Currently, the Core Agent is configured via the TOML configuration file. To set your own configuration options, edit the file located at
+
+        ```bash
+        cd VES/services/log-collector/src/config
+        ```
+        Edit the configuration file based on how you'd like to use the Core Agent. See [configuration options](../guides/configuration#core-agent-configuration)
+        <Note>
+            The current version of VES (v0.1.0) does not support does not support configuration at runtime. Ensure you have configured your instance before building.
+        </Note>
+    </Step>
+
+    <Step title="Build an executable binary from your local repo">
+        Go to the repo's root directory and run the cargo build command to get an executable binary
+
+        ```bash
+        cd VES
+        cargo build --release --locked
+        ```
+
+        <Note>
+            The `--locked` when building the source ensures you use the exact dependency version specified in the **`Cargo.lock`** file, **DO NOT manually edit this file!**
+        </Note>
+    </Step>
+
+    <Step title="Run the executable binary 🚀">
+        Go to the executable binary's location, set execute instructions(for Linux) and run it
+
+        <Tabs>
+            <Tab title="Linux">
+                Go to the compiled binary location and grant execute permissions
+                ```bash
+                cd target/release
+                chmod +x ves
+                ```
+                Confirm the binary has execute permissions
+                ```bash
+                ./ves help
+                ```
+                <Note>
+                    You should see instructions for running the binary in your terminal after running the above command, otherwise the binary does not have execute permissions
+                </Note>
+
+                Run the binary 🚀
+                ```bash
+                ./ves run
+                ```
+            </Tab>
+
+            <Tab title="Windows">
+                Go to the compiled binary location and confirm the binary works **using powershell**
+                ```bash
+                cd target\release
+                .\ves.exe help
+                ```
+
+                <Note>
+                    You should see instructions for running the binary in your terminal, otherwise something went wrong
+                </Note>
+
+                Run the binary 🚀
+                ```bash
+                .\ves.exe run
+                ```
+            </Tab>
+        </Tabs>
+
+    </Step>
+
+</Steps>
+
+You should now have a local running VES (Core Agent) instance! You are now collecting and processing observability data from the source you configured earlier.
+
+## Best Practices
+
+<AccordionGroup>
+    <Accordion title="Best Practices (v0.1.0)">
+        - Always ensure you are using the latest source version
+        - Create an issue for any [bugs and unexpected behavior](https://github.com/H3IMD3LL-Labs-Inc/VES/issues/new?template=bug_report.md) you encounter
+    </Accordion>
+</AccordionGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+    <Card title="Building from source" icon="code" href="../guides/building">
+        Solutions to common issues
+    </Card>
+    <Card title="Configuration Guides" icon="gear" href="../guides/configuration">
+        More on configurion options
+    </Card>
+</CardGroup>

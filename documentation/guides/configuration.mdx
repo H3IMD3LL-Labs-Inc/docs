@@ -1,0 +1,280 @@
+---
+title: 'Configuration'
+description: "An explanation of how to configure VES for your use case"
+sidebarTitle: "Configuration"
+icon: 'gear'
+---
+
+<Info>
+    v1.0.0 will introduce breaking changes to this documentation
+</Info>
+
+---
+
+## Introduction
+
+The core architecture components, that is; **Core Agent**, **Vector Embedding Engine** and **Vector Enhanced Search** can be configured using their specific configuration `TOML` files.
+
+Specific configuration options for each component are explained. As much as these explanations are considered a good starting point, it is recommended you play around with your configuration options to find what works best for you.
+
+<Note>
+    v0.1.0 only supports configuration for the core agent, see [Coming Soon](../coming-soon/overview)
+</Note>
+
+---
+
+## Core Agent Configuration
+
+The agent's default configuration can be found at the project's config directory on your local repo
+
+```bash
+cd VES/services/log-collector/src/config
+```
+
+This is the default configuration file, ensure this is exactly how the configuration file looks like before you set your own configuration options
+
+```toml
+[general]
+enable_local_mode = true
+enable_network_mode = true
+
+[watcher]
+enabled = true
+checkpoint_path = "path/to/checkpoint.json"
+log_dir = "path/to/log/file(s)/directory"
+poll_interval_ms = 5000
+recursive = false
+
+[parser]
+
+[buffer]
+capacity_option = "unbounded"
+buffer_capacity = 10000
+batch_size = 200
+batch_timeout_ms = 500
+overflow_policy = "drop_oldest"
+flush_policy = "batch_size"
+drain_policy = "batch_size"
+
+[buffer.durability]
+type = "s-q-lite"
+path = "/var/ves-sqlite-db/parsed_log_buffer.db"
+
+[shipper]
+embedder_target_addr = "https://127.0.0.1:50051"
+connection_timeout_ms = 500
+max_reconnect_attempts = 10
+initial_retry_delay_ms = 500
+max_retry_delay_ms = 30000
+backoff_factor = 2.0
+retry_jitter = 0.2
+send_timeout_ms = 3000
+response_timeout_ms = 10000
+```
+
+<Tabs>
+    <Tab title="[general]">
+        Configures Core Agent to expect your observability data locally, over-the-network or from both sources
+
+        <CodeGroup>
+            ```toml Local mode
+            [general]
+            enable_local_mode = true
+            ```
+
+            ```toml Over-the-network mode
+            [general]
+            enable_network_mode = true
+            ```
+
+            ```toml Dual mode
+            [general]
+            enable_local_mode = true
+            enable_network_mode = true
+            ```
+        </CodeGroup>
+
+        <Tip>
+            1. `Local mode` set to true when Core Agent is running on the same node as your observability data producer
+            2. `Over-the-network mode` set to true when Core Agent is running on a separate node from your observability data producer
+            3. `Dual mode` set both local and over-the-network mode to true, when Core Agent is running on a node producing observability data but should collect data from another node
+        </Tip>
+    </Tab>
+    <Tab title="[watcher]">
+        Configures Core Agent observability data file watcher, keeping track of the file containing your observability data while the agent works on this data
+
+        <CodeGroup>
+            ```toml Enable
+            [watcher]
+            enabled = true
+            ```
+
+            ```toml Checkpoint directory
+            [watcher]
+            checkpoint_path = "path/to/checkpoint.json"
+            ```
+
+            ```toml Data directory
+            [watcher]
+            log_dir = "path/to/observability/data/directory"
+            ```
+
+            ```toml Watcher poll interval
+            [watcher]
+            poll_interval_ms = 5000
+            ```
+
+            ```toml Behavior
+            [watcher]
+            recursive = false
+            ```
+        </CodeGroup>
+
+        <Tip>
+            - `Enable` ensures the agent's observability data watcher is enabled, <u>**should always be true**</u>
+            - `Checkpoint directory` checkpoint file location, allowing the agent's watcher to resume on restart/crash
+            - `Data directory` configures the directory where the agent can find observability data while <u>**in local mode**</u>
+            - `Watcher poll interval` configures the duration before the agent's watcher checks for updates to your observability data source
+            - `Behavior` configures the agent's behavior (how it keeps track of your observability data source) at runtime
+        </Tip>
+    </Tab>
+    <Tab title="[parser]">
+        Currently for v0.1.0 the Core Agent's parser is non-configurable :)
+
+        Coming Soon.
+        <Note>
+            Check out the latest improvements to v0.1.0. See [latest improvements](https://github.com/H3IMD3LL-Labs-Inc/VES)
+        </Note>
+    </Tab>
+    <Tab title="[buffer]">
+        Configures Core Agent's buffering and batching implementation, ensuring the normalization pipeline remains performant. See [normalization pipeline](../ves-v0.1.0/ves)
+
+        <CodeGroup>
+            ```toml Capacity
+            [buffer]
+            capacity_option = "bounded"
+            ```
+
+            ```toml Capacity size
+            [buffer]
+            buffer_capacity = 10000
+            ```
+
+            ```toml Batch size
+            [buffer]
+            batch_size = 200
+            ```
+
+            ```toml Batch timeout
+            [buffer]
+            batch_timeout_ms = 500
+            ```
+
+            ```toml Overflow policy
+            [buffer]
+            overflow_policy = "drop_oldest"
+            ```
+
+            ```toml Flush policy
+            [buffer]
+            flush_policy = "batch_size"
+            ```
+
+            ```toml Drain policy
+            [buffer]
+            drain_policy = "batch_size"
+            ```
+        </CodeGroup>
+
+        <Tip>
+            - `Capacity` defines capacity type for the agent's buffers. It is <u>recommended to use "bounded" capacity.</u>
+            - `Capacity size` defines the total available capacity the agent allocates in buffers.
+            - `Batch size` defines batch size in agent's buffers, this affects the size of each uniformly structured observability data batch the agent processes.
+            - `Batch timeout` defines the duration after which uniformly structured observability data will be taken from the agent's buffers during processing, the data itself is the data appearing during the duration set.
+            - `Overflow policy` is how the agent will handle a scenario where its buffers are overflowing. This prevents buffer overflows which may lead to incorrect capacity calculations and memory safety issues.
+            - `Flush policy` is how the agent will handle flushing uniformly structured observability data from its buffers.
+            - `Drain policy` is how the agent will handle draining uniformly structured observability data from its buffers.
+        </Tip>
+    </Tab>
+    <Tab title="[buffer.durability]">
+         Configures Core Agent durability setting, whether to persist data to storage or just use in-memory data while running
+
+         <CodeGroup>
+             ```toml [buffer.durability]
+             # Options: (type = "s-q-lite" or type = "inmemory")
+             [buffer.durability]
+             type = "s-q-lite"
+             path = "/var/ves-sqlite-db/parsed_log_buffer.db"
+             ```
+         </CodeGroup>
+
+         <Warning>
+             It is recommended to run the agent while persisting data to storage not in-memory, to prevent data loss on restarts/crashes
+         </Warning>
+    </Tab>
+    <Tab title="[shipper]">
+        Configures how the Core Agent ships uniformly structured data to destination sinks and/or the Vector Embedding Engine for storage and vectorization, respectively
+
+        <CodeGroup>
+            ```toml Embedding engine addr
+            [shipper]
+            embedder_target_addr = "https://127.0.0.1:50051"
+            ```
+
+            ```toml Connection timeout
+            [shipper]
+            connection_timeout_ms = 500
+            ```
+
+            ```toml Reconnect attempts
+            [shipper]
+            max_reconnect_attempts = 10
+            ```
+
+            ```toml Reconnect retry delay
+            [shipper]
+            initial_retry_delay_ms = 500
+            max_retry_delay_ms = 30000
+            ```
+
+            ```toml Reconnect safeguards
+            [shipper]
+            backoff_factor = 2.0
+            retry_jitter = 0.2
+            ```
+
+            ```toml Request/Response timeouts
+            [shipper]
+            send_timeout_ms = 3000
+            response_timeout_ms = 10000
+            ```
+        </CodeGroup>
+        <Tip>
+            - `Embedding engine address` configures the address of a running vector embedding engine the agent will ship uniformly structured observability data to.
+            - `Connection timeout` configures the wait time the agent will have to try connecting to the vector embedding engine before failing the connection attempt.
+            - `Reconnect attempts` configures the number of attempts the agent will have to reconnect to the vector embedding engine before failing the reconnection attempt.
+            - `Reconnect retry delay` configures initial and max delay times the agent will use between each reconnection attempt made to the vector embedding engine.
+            - `Reconnect safeguards` are safety measures for the reconnection to the vector embedding engine, **backoff_factor** sets a multiplier for reconnection attempts while **retry_jitter** sets a random jitter percentage to reconnection attempts to prevent a thundering herd problem while attempting a reconnection.
+            - `Request/Response timeouts` are timeouts related to the agent---embedding engine gRPC stream, **send_timeout_ms** sets a max timeout to push a single uniformly structured observability data batch into the vector embedding engine gRPC stream, while **response_timeout_ms** sets a max timeout to wait for a response from the vector embedding engine before declaring the gRPC stream unhealthy.
+        </Tip>
+    </Tab>
+</Tabs>
+
+## Vector Embedding Engine Configuration
+
+Coming Soon!
+
+## Vector Enhanced Search Configuration
+
+Coming Soon!
+
+## Next Steps
+
+<CardGroup cols={2}>
+    <Card title="Setup an instance" icon="rocket" href="../ves-v0.1.0/getting-started">
+        Setup and configure your own instance locally
+    </Card>
+    <Card title="Learn more about VES" icon="book" href="../ves-v0.1.0/ves">
+        Understand how the platform is designed and works
+    </Card>
+</CardGroup>
