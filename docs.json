@@ -58,6 +58,10 @@
   "search": {
     "prompt": "Search Docs"
   },
+  "validation": {
+    "spellcheck": false,
+    "linkrot": false
+  },
   "navbar": {
     "links": [
       {
