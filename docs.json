@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "v0.1.0",
+  "name": "v1.0.0",
   "colors": {
     "primary": "#F26419",
     "light": "#FF8548",
@@ -11,45 +11,96 @@
     "decoration": "gradient"
   },
   "navigation": {
-    "tabs": [
+    "versions": [
       {
-        "tab": "VES",
-        "groups": [
+        "version": "0.1.0",
+        "tabs": [
           {
-            "group": "Getting Started",
-            "pages": [
-              "documentation/ves-v0.1.0/intro",
-              "documentation/ves-v0.1.0/getting-started",
-              "documentation/ves-v0.1.0/ves"
+            "tab": "VES",
+            "groups": [
+              {
+                "group": "Getting Started",
+                "pages": [
+                  "documentation/ves-v0.1.0/intro",
+                  "documentation/ves-v0.1.0/getting-started",
+                  "documentation/ves-v0.1.0/ves"
+                ]
+              },
+              {
+                "group": "Coming Soon",
+                "pages": ["documentation/coming-soon/overview"]
+              }
             ]
           },
           {
-            "group": "Coming Soon",
-            "pages": ["documentation/coming-soon/overview"]
-          }
-        ]
-      },
-      {
-        "tab": "Guides",
-        "groups": [
+            "tab": "Guides",
+            "groups": [
+              {
+                "group": "Guides",
+                "pages": [
+                  "documentation/guides/overview",
+                  "documentation/guides/configuration",
+                  "documentation/guides/troubleshooting",
+                  "documentation/guides/building",
+                  "documentation/guides/contributing"
+                ]
+              }
+            ]
+          },
           {
-            "group": "Guides",
-            "pages": [
-              "documentation/guides/overview",
-              "documentation/guides/configuration",
-              "documentation/guides/troubleshooting",
-              "documentation/guides/building",
-              "documentation/guides/contributing"
+            "tab": "Benchmarks",
+            "groups": [
+              {
+                "group": "Benchmarks",
+                "pages": ["documentation/benchmarks/v1.0.0"]
+              }
             ]
           }
         ]
       },
       {
-        "tab": "Benchmarks",
-        "groups": [
+        "version": "1.0.0",
+        "tabs": [
           {
-            "group": "Benchmarks",
-            "pages": ["documentation/benchmarks/v1.0.0"]
+            "tab": "VES",
+            "groups": [
+              {
+                "group": "Getting Started",
+                "pages": [
+                  "documentation/ves-v1.0.0/intro",
+                  "documentation/ves-v1.0.0/getting-started",
+                  "documentation/ves-v1.0.0/ves"
+                ]
+              },
+              {
+                "group": "Coming Soon",
+                "pages": ["documentation/coming-soon/overview"]
+              }
+            ]
+          },
+          {
+            "tab": "Guides",
+            "groups": [
+              {
+                "group": "Guides",
+                "pages": [
+                  "documentation/guides/overview",
+                  "documentation/guides/configuration",
+                  "documentation/guides/troubleshooting",
+                  "documentation/guides/building",
+                  "documentation/guides/contributing"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "Benchmarks",
+            "groups": [
+              {
+                "group": "Benchmarks",
+                "pages": ["documentation/benchmarks/v1.0.0"]
+              }
+            ]
           }
         ]
       }
