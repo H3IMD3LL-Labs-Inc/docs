@@ -3,7 +3,7 @@
   "redirects": [
   {
     "source": "/docs",
-    "destination": "/ves-v0.1.0/intro"
+    "destination": "/docs/ves-v0.1.0/intro"
   }
 ],
   "theme": "mint",
@@ -24,14 +24,14 @@
           {
             "group": "Getting Started",
             "pages": [
-              "ves-v0.1.0/intro",
-              "ves-v0.1.0/getting-started",
-              "ves-v0.1.0/ves"
+              "docs/ves-v0.1.0/intro",
+              "docs/ves-v0.1.0/getting-started",
+              "docs/ves-v0.1.0/ves"
             ]
           },
           {
             "group": "Coming Soon",
-            "pages": ["coming-soon/overview"]
+            "pages": ["docs/coming-soon/overview"]
           }
         ]
       },
@@ -41,11 +41,11 @@
           {
             "group": "Guides",
             "pages": [
-              "guides/overview",
-              "guides/configuration",
-              "guides/troubleshooting",
-              "guides/building",
-              "guides/contributing"
+              "docs/guides/overview",
+              "docs/guides/configuration",
+              "docs/guides/troubleshooting",
+              "docs/guides/building",
+              "docs/guides/contributing"
             ]
           }
         ]
@@ -55,7 +55,7 @@
         "groups": [
           {
             "group": "Benchmarks",
-            "pages": ["benchmarks/v1.0.0"]
+            "pages": ["docs/benchmarks/v1.0.0"]
           }
         ]
       }
