@@ -1,6 +1,12 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "basePath": "/docs",
+  "redirects": [
+  {
+    "source": "/",
+    "destination": "/ves-v0.1.0/intro"
+  }
+],
   "theme": "mint",
   "name": "v0.1.0",
   "colors": {
