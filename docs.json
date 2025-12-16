@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "basePath": "/docs"
+  "basePath": "/docs",
   "theme": "mint",
   "name": "v0.1.0",
   "colors": {
