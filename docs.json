@@ -18,14 +18,14 @@
           {
             "group": "Getting Started",
             "pages": [
-              "documentation/ves-v0.1.0/intro",
-              "documentation/ves-v0.1.0/getting-started",
-              "documentation/ves-v0.1.0/ves"
+              "docs/ves-v0.1.0/intro",
+              "docs/ves-v0.1.0/getting-started",
+              "docs/ves-v0.1.0/ves"
             ]
           },
           {
             "group": "Coming Soon",
-            "pages": ["documentation/coming-soon/overview"]
+            "pages": ["docs/coming-soon/overview"]
           }
         ]
       },
@@ -35,11 +35,11 @@
           {
             "group": "Guides",
             "pages": [
-              "documentation/guides/overview",
-              "documentation/guides/configuration",
-              "documentation/guides/troubleshooting",
-              "documentation/guides/building",
-              "documentation/guides/contributing"
+              "docs/guides/overview",
+              "docs/guides/configuration",
+              "docs/guides/troubleshooting",
+              "docs/guides/building",
+              "docs/guides/contributing"
             ]
           }
         ]
@@ -49,7 +49,7 @@
         "groups": [
           {
             "group": "Benchmarks",
-            "pages": ["documentation/benchmarks/v1.0.0"]
+            "pages": ["docs/benchmarks/v1.0.0"]
           }
         ]
       }
